@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vanilla JS Dom Manipulation</title>
+</head>
+
+<body>
+    <h1 class="advice"></h1>
+    <button class="get-advice-btn">Get advice</button>
+    <p>You have read <strong class="advice-count"></strong> pieces of advice</p>
+</body>
+<script>
+    const advice = document.querySelector(".advice");
+    const getAdviceBtn = document.querySelector(".get-advice-btn");
+    const adviceCount = document.querySelector(".advice-count");
+    let count = 0;
+    let adviceStr = "";
+
+    async function getAdvice() {
+        const res = await fetch("https://api.adviceslip.com/advice", { cache: "no-cache" });
+        const data = await res.json();
+
+        adviceStr = data.slip.advice;
+        count = count + 1;
+
+        advice.textContent = adviceStr;
+        adviceCount.textContent = count;
+    }
+
+    getAdvice();
+    getAdviceBtn.addEventListener("click", getAdvice);
+</script>
+</html>
