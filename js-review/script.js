@@ -34,6 +34,7 @@ const data = [
   },
   {
     id: 2,
+    test: "yogabba",
     title: "The Cyberiad",
     publicationDate: "1965-01-01",
     author: "Stanislaw Lem",
@@ -142,3 +143,21 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
+
+const book = getBook(2);
+const { id, author, title, genres } = book;
+
+// genres[0] is primary, genres[1] is secondary, other is the remaining genres
+const [primary, secondary, ...other] = genres;
+
+// Adding a new genre to the genres array using the spread operator
+const newGenres = [...genres, "epic"];
+
+// Updating an exising object using the spread operator
+const updatedBook = {
+  ...book,
+  moviePublicationDate: "2001-12-05", // Adding a new property
+  pages: 12234, // Overwriting an existing property
+};
+
+console.log(updatedBook);
