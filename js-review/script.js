@@ -113,7 +113,7 @@ const data = [
     publicationDate: "1996-08-01",
     author: "George R. R. Martin",
     genres: ["fantasy", "high-fantasy", "novel", "fantasy fiction"],
-    hasMovieAdaptation: true,
+    hasMovieAdaptation: false,
     pages: 835,
     translations: {
       korean: "왕좌의 게임",
@@ -143,7 +143,7 @@ function getBooks() {
 function getBook(id) {
   return data.find((d) => d.id === id);
 }
-
+/*
 const book = getBook(2);
 const { id, author, title, genres } = book;
 
@@ -161,3 +161,64 @@ const updatedBook = {
 };
 
 console.log(updatedBook);
+
+// function getYear(date) {
+//   return date.split("-")[0];
+// }
+
+const getYear = (str) => str.split("-")[0];
+
+console.log(getYear(updatedBook.moviePublicationDate));
+*/
+
+function getTotalReviewCount(book) {
+  const goodreads = book.reviews?.goodreads?.reviewsCount;
+  const librarything = book.reviews?.librarything?.reviewsCount;
+  return goodreads + librarything;
+}
+
+const books = getBooks();
+
+const book1ReviewCount = getTotalReviewCount(getBook(1));
+console.log(book1ReviewCount);
+
+const book2ReviewCount = getTotalReviewCount(getBook(2));
+console.log(book2ReviewCount);
+
+// Map
+const x = [1, 2, 3, 4, 5].map((el) => el * 2);
+console.log(x);
+
+const titles = books.map((book) => book.title);
+console.log(titles);
+
+const essential = books.map((book) => ({
+  title: book.title,
+  author: book.author,
+  reviewsCount: getTotalReviewCount(book),
+}));
+
+console.log(essential);
+
+// Filter
+const longBooks = books.filter((book) => book.pages > 500);
+console.log(longBooks);
+
+const adventureBooks = books
+  .filter((book) => book.genres.includes("adventure"))
+  .map((book) => `title: ${book.title}`);
+console.log(adventureBooks);
+
+// Reduce
+const pagesAllBooks = books.reduce((sum, book) => sum + book.pages, 0);
+console.log(pagesAllBooks);
+
+// Sort
+const nums = [4, 3, 123, 6];
+// const sorted = nums.sort((a, b) => a - b);  // mutates original array
+const sorted = nums.slice().sort((a, b) => a - b);
+console.log(sorted);
+console.log(nums);
+
+const sortedBypages = books.slice().sort((a, b) => a.pages - b.pages);
+console.log(sortedBypages);
