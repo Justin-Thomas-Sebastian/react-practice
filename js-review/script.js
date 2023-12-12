@@ -169,7 +169,6 @@ console.log(updatedBook);
 const getYear = (str) => str.split("-")[0];
 
 console.log(getYear(updatedBook.moviePublicationDate));
-*/
 
 function getTotalReviewCount(book) {
   const goodreads = book.reviews?.goodreads?.reviewsCount;
@@ -222,3 +221,43 @@ console.log(nums);
 
 const sortedBypages = books.slice().sort((a, b) => a.pages - b.pages);
 console.log(sortedBypages);
+
+// Add book object to array
+const newBook = {
+  id: 6,
+  title: "Harry Potter and the Chamber of Secrets",
+  author: "J.K. Rowling",
+};
+
+const booksAfterAdd = [...books, newBook];
+console.log(booksAfterAdd);
+
+// Delete Book object from array
+const booksAfterDelete = booksAfterAdd.filter((book) => book.id !== 3);
+console.log(booksAfterDelete);
+
+// Update book object in the array
+const booksAfterUpdate = booksAfterDelete.map((book) =>
+  book.id === 1 ? { ...book, pages: 1 } : book
+);
+console.log(booksAfterUpdate);
+*/
+
+// Promises review
+// fetch("https://jsonplaceholder.typicode.com/todos")
+//   .then((res) => res.json())
+//   .then((data) => console.log(data));
+
+// console.log("Justin"); // Gets printed to the console first, before the fetch finishes
+
+// Async/Await review
+async function getTodos() {
+  const res = await fetch("https://jsonplaceholder.typicode.com/todos");
+  const data = await res.json();
+  console.log(data);
+  return data;
+}
+
+const todos = getTodos();
+console.log(todos); //Will only log promise object, not the data
+console.log("Justin"); // Gets printed to the console first, before the fetch finishes
