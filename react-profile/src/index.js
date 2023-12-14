@@ -1,6 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./styles.css";
+import { skills } from "./skills-data";
 
 function App() {
   return <Card />;
@@ -38,23 +39,32 @@ function Data() {
 function SkillList() {
   return (
     <ul className="skill-list">
-      <Skill backgroundColor="lightblue" text="HTML+CSS" icon="./alien.png" />
-      <Skill backgroundColor="yellow" text="JavaScript" icon="./alien.png" />
-      <Skill backgroundColor="green" text="React" icon="./alien.png" />
-      <Skill backgroundColor="red" text="Java" icon="./alien.png" />
-      <Skill backgroundColor="cyan" text="Python" icon="./alien.png" />
-      <Skill backgroundColor="orange" text="Git & Github" icon="./alien.png" />
+      {skills.map((skill) => (
+        <Skill skillListObj={skill} key={skill.name} />
+      ))}
     </ul>
   );
 }
 
-function Skill(props) {
+function Skill({ skillListObj }) {
+  let levelEmoji = "";
+  switch (skillListObj.level) {
+    case "advanced":
+      levelEmoji = "😎";
+      break;
+    case "intermediate":
+      levelEmoji = "👍";
+      break;
+    case "beginner":
+      levelEmoji = "👶";
+      break;
+    default:
+      levelEmoji = "";
+  }
   return (
-    <li className="skill" style={{ backgroundColor: props.backgroundColor }}>
-      {props.text}
-      <span>
-        <img src={props.icon} alt="icon"></img>
-      </span>
+    <li className="skill" style={{ backgroundColor: skillListObj.color }}>
+      {skillListObj.name}
+      <span>{levelEmoji}</span>
     </li>
   );
 }
