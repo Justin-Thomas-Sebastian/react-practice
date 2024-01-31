@@ -20,10 +20,24 @@ function Logo() {
     return <h1>🏝️ Far Away 💼</h1>;
 }
 function Form() {
+    function handleSubmit(e) {
+        e.preventDefault();
+        console.log(e);
+    }
+
     return (
-        <div className="add-form">
+        <form className="add-form" onSubmit={handleSubmit}>
             <h3>What do you need for your trip?</h3>
-        </div>
+            <select>
+                {Array.from(Array(20).keys(), (x) => x + 1).map((num) => (
+                    <option value={num} key={num}>
+                        {num}
+                    </option>
+                ))}
+            </select>
+            <input type="text" placeholder="Item..."></input>
+            <button>Add</button>
+        </form>
     );
 }
 
