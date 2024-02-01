@@ -1,0 +1,38 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.deck {
+    list-style-type: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    flex-wrap: wrap;
+}
+
+.card {
+    height: 15rem;
+    width: 30%;
+    border: 1px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.answer {
+    background-color: green;
+}
+
+.card:hover {
+    background-color: #707070;
+}
+
+.card p {
+    text-align: center;
+}
